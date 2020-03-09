@@ -1,4 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation
+npm i
+
+## Build
+npm run build
+
+## Start
+npm start
+
+## Stop Focus the terminal window where you started the app
+Press CTRL + C
+This should kill the process running the app.
+
 
 ## Available Scripts
 
