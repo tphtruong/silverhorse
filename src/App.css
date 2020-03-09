@@ -56,6 +56,15 @@ ul.post-container {
   margin: 0px 10px;
 }
 
+.post-container button.update {
+  background-color: blue;
+  color:white;
+}
+.post-container button.cancel {
+  background-color:red ;
+  color:white;
+}
+
 .post-container .active  {
   background-color: lightskyblue;
 }
@@ -63,6 +72,14 @@ ul.post-container {
 .header {
   font-weight: bold;
   padding: 20px 0px;
+}
+
+.Toastify__toast--success {
+	background: #0d5257 !important;
+}
+
+.Toastify__toast--error {
+	background: #ee2e24 !important;
 }
 
 @keyframes App-logo-spin {

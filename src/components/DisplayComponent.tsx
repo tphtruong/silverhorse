@@ -26,7 +26,7 @@ const DisplayComponent: React.FC<ListOfItemsProps> = ({
       <span className='header name'>Edit/Delete</span>
     </li>
     {items.map((el: Item,i :number) => {
-      return <li key={el.postId}>
+      return <li key={Math.random()}>
         <span className='name'>{el.name}</span>
 
         {edited && edited.postId === el.postId         
@@ -39,8 +39,8 @@ const DisplayComponent: React.FC<ListOfItemsProps> = ({
               type='text' value={edited ? edited.postTitle : el.postTitle} />
             </span>
           <span>
-            <button onClick={() => onUpdate(edited)} >Update</button>
-            <button onClick={() => onCancel(el)} value='Edit' >Cancel</button>
+            <button className='update' onClick={() => onUpdate(edited)} >Update</button>
+            <button className='cancel' onClick={() => onCancel(el)} value='Edit' >Cancel</button>
           </span>
         </>) : (<>
           <span className='title'>{el.postTitle}</span>

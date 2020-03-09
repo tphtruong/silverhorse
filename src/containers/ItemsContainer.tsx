@@ -3,6 +3,7 @@ import DisplayComponent from '../components/DisplayComponent';
 import { Item, User, Post } from "../entities/CommonTypes";
 import _ from 'lodash';
 import { LinearProgress } from '@material-ui/core';
+import { toast } from 'react-toastify';
 
 const baseUrl = 'https://jsonplaceholder.typicode.com';
 
@@ -11,10 +12,6 @@ function loadJson(url:string) {
     .then(response => response.json());
 }
 
-type customProps = {
-  isLoading?: [];
-};
-
 type customState = {
   items: any | null;
   posts: any | null;
@@ -22,8 +19,8 @@ type customState = {
   isLoading: boolean;
 };
 
-class ItemsContainer extends React.Component<customProps, customState> {
-  constructor(props: Readonly<customProps>) {
+class ItemsContainer extends React.Component<{}, customState> {
+  constructor(props:any) {
     super(props);
 
     this.state = {
@@ -54,6 +51,7 @@ class ItemsContainer extends React.Component<customProps, customState> {
       this.setState({
         posts: _items
       })
+      toast.success(`{item ${item.name} updated successful.}`);
     }
     this.handleCancel();
   }
@@ -65,11 +63,14 @@ class ItemsContainer extends React.Component<customProps, customState> {
   }
 
   handleDelete = (item:Item) => {
-    const _items = this.state.posts.filter((el:Item) => el.postId !== item.postId);
-    this.setState({
-      posts: _items
-    })
-    this.handleCancel();
+    if (window.confirm("Are you sure you want to delete item " + item.name)) {
+      const _items = this.state.posts.filter((el:Item) => el.postId !== item.postId);
+      this.setState({
+        posts: _items
+      })
+      toast.success(`{item ${item.name} deleted successful.}`);
+      this.handleCancel();
+    }     
   }
 
   componentDidMount() {
@@ -106,9 +107,9 @@ class ItemsContainer extends React.Component<customProps, customState> {
         })
 
         //albumns
-        loadJson('/albums')
-        .then(albums => {
-          listOfItems = [...listOfItems,{albums:albums}];
+        // loadJson('/albums')
+        // .then(albums => {
+        //   listOfItems = [...listOfItems,{albums:albums}];
 
           // update state
           this.setState({
@@ -117,7 +118,7 @@ class ItemsContainer extends React.Component<customProps, customState> {
             isLoading: false,
           })
           
-        })         
+        // })         
       })
     })
   }
@@ -125,11 +126,10 @@ class ItemsContainer extends React.Component<customProps, customState> {
   render() {
     const { posts, edited, isLoading } = this.state;
 
-
     return (<>
       {isLoading && <div className="text-center mt-20"><LinearProgress /></div>}
 
-      <h2>Welcome</h2>
+      <h2>Welcome to my test page</h2>
       <DisplayComponent 
         items={posts} 
         onEdit={this.handleEdit} 
